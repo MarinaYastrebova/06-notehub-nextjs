@@ -1,5 +1,10 @@
-const Loading = () => {
-  return <p>Loading, please wait...</p>;
-};
+import css from './notes/NotesPage.module.css';
 
-export default Loading;
+export default function Loading() {
+  return (
+    <div className={css.container}>
+      <div className={css.spinner}></div>
+      <p className={css.text}>Loading, please wait...</p>
+    </div>
+  );
+}

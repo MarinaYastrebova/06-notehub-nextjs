@@ -27,6 +27,9 @@ export interface CreateNoteResponse {
 export interface DeleteNoteResponse {
   note: Note;
 }
+export interface FetchNoteByIdResponse {
+  note: Note;
+}
 
 export const fetchNotes = async (params: FetchNotesParams = {}): Promise<FetchNotesResponse> => {
   const response = await axios.get<FetchNotesResponse>(`${BASE_URL}/notes`, {
@@ -37,6 +40,16 @@ export const fetchNotes = async (params: FetchNotesParams = {}): Promise<FetchNo
   });
   return response.data;
 };
+
+export const fetchNoteById = async (id: string): Promise<Note> => {
+  const response = await axios.get<FetchNoteByIdResponse>(`${BASE_URL}/notes/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data.note;
+};
+
 export const createNote = async (noteData: CreateNoteData): Promise<CreateNoteResponse> => {
   const response = await axios.post<CreateNoteResponse>(`${BASE_URL}/notes`, noteData, {
     headers: {
